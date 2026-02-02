@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Forgot Password</title>
+        <title>Business Registration</title>
         <style>
             * {
                 box-sizing: border-box;
@@ -19,7 +19,7 @@
                 justify-content: center;
             }
 
-            .forgot-container {
+            .register-container {
                 width: 100%;
                 max-width: 380px;
                 background-color: #ffffff;
@@ -28,17 +28,10 @@
                 box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             }
 
-            .forgot-container h2 {
+            .register-container h2 {
                 text-align: center;
-                margin-bottom: 16px;
-                color: #333;
-            }
-
-            .forgot-container p {
-                text-align: center;
-                color: #666;
-                font-size: 14px;
                 margin-bottom: 24px;
+                color: #333;
             }
 
             .form-group {
@@ -52,6 +45,8 @@
                 color: #555;
             }
 
+            input[type="text"],
+            input[type="password"],
             input[type="email"] {
                 width: 100%;
                 padding: 10px 12px;
@@ -63,8 +58,8 @@
 
             input:focus {
                 outline: none;
-                border-color: #ffc107;
-                box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+                border-color: #007bff;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
             }
 
             button {
@@ -72,47 +67,58 @@
                 padding: 12px;
                 font-size: 16px;
                 color: #fff;
-                background-color: #ffc107;
+                background-color: #007bff;
                 border: none;
                 border-radius: 6px;
                 cursor: pointer;
                 transition: background-color 0.2s;
-                margin-bottom: 12px;
             }
 
             button:hover {
-                background-color: #e0a800;
+                background-color: #0056b3;
             }
 
-            .back-link {
-                text-align: center;
-            }
-
-            .back-link a {
-                color: #007bff;
-                text-decoration: none;
-                font-size: 14px;
-            }
-
-            .back-link a:hover {
-                text-decoration: underline;
+            .form-subtitle {
+                font-size: 12px;
+                color: #666;
+                margin-top: 4px;
             }
         </style>
     </head>
     <body>
-        <div class="forgot-container">
-            <h2>Forgot Password</h2>
-            <p>Enter your email address and we'll send you a password reset link</p>
-            <form method="POST" action="{{ url_for('auth.forgot_password') }}">
+        <div class="register-container">
+            <h2>Business Registration</h2>
+            <form method="POST" action="{{ url_for('auth.business_register') }}">
                 <div class="form-group">
-                    <label for="email">Email Address</label>
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
                     <input type="email" id="email" name="email" required>
                 </div>
-                <button type="submit">Send Reset Link</button>
+                <div class="form-group">
+                    <label for="phone_no">Phone Number</label>
+                    <input type="text" id="phone_no" name="phone_no" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="org_name">Organization Name</label>
+                    <input type="text" id="org_name" name="org_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Register Business</button>
             </form>
-            <div class="back-link">
-                <a href="{{ url_for('auth.login') }}">Back to Login</a>
-            </div>
         </div>
     </body>
 </html>
