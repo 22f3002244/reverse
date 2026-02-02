@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify OTP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #f4f4f4, #eaeaea);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .otp-container {
+            width: 100%;
+            max-width: 380px;
+            background: #fff;
+            padding: 32px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .otp-container h2 {
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .otp-input {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .otp-input input {
+            width: 48px;
+            height: 52px;
+            font-size: 20px;
+            text-align: center;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            transition: all 0.2s;
+        }
+
+        .otp-input input:focus {
+            outline: none;
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            background-color: #6c63ff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #5753d6;
+        }
+
+        .resend {
+            margin-top: 16px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .resend a {
+            color: #6c63ff;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .error {
+            background: #ffe5e5;
+            color: #b00020;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 14px;
+        }
+
+        .success {
+            background: #e6f6ec;
+            color: #1e7e34;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="otp-container">
+
+    <h2>Verify OTP</h2>
+
+    <div class="subtitle">
+        Enter the 6-digit OTP sent to your {{ verification_type }}
+        <br>
+        <small>{{ masked_target }}</small>
+    </div>
+
+    <form method="POST" action="/user/verify-otp/{{ change_type }}">
+        <div class="otp-input">
+            <input type="text" name="o1" maxlength="1" required>
+            <input type="text" name="o2" maxlength="1" required>
+            <input type="text" name="o3" maxlength="1" required>
+            <input type="text" name="o4" maxlength="1" required>
+            <input type="text" name="o5" maxlength="1" required>
+            <input type="text" name="o6" maxlength="1" required>
+        </div>
+
+        <button type="submit">Verify OTP</button>
+    </form>
+
+    <div class="resend">
+        Didn't receive the OTP?
+        <a href="/user/resend-otp/{{ change_type }}">Resend</a>
+    const inputs = document.querySelectorAll('.otp-input input');
+
+    inputs.forEach((input, index) => {
+        input.addEventListener('input', () => {
+            if (input.value && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        });
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && !input.value && index > 0) {
+                inputs[index - 1].focus();
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

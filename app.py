@@ -1,5 +1,6 @@
 from flask import Flask
 from database import Base, engine
+import os
 
 # Import blueprints
 from routes.auth import auth_bp
@@ -17,6 +18,9 @@ from models import *
 
 def create_app():
     app = Flask(__name__)
+    
+    # Set secret key for session management
+    app.secret_key = os.getenv("SECRET_KEY", "dev-secret-key-change-in-production")
 
     # Create tables
     Base.metadata.create_all(bind=engine)

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Email</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #f4f4f4, #eaeaea);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .update-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #ffffff;
+            padding: 32px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .update-container h2 {
+            text-align: center;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input[readonly] {
+            background-color: #f5f5f5;
+            color: #777;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            background-color: #6c63ff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #5753d6;
+        }
+
+        .note {
+            margin-top: 14px;
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="update-container">
+    <h2>Update Email Address</h2>
+    <div class="subtitle">
+        This email is used for login, bookings, and refunds
+    </div>
+
+    <form method="POST" action="/user/change-email">
+
+        <!-- CURRENT EMAIL (FROM DB) -->
+        <div class="form-group">
+            <label>Current Email</label>
+            <input type="email" value="{{ user.email }}" readonly>
+        </div>
+
+        <!-- NEW EMAIL -->
+        <div class="form-group">
+            <label for="email">New Email Address</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <!-- PASSWORD CONFIRMATION -->
+        <div class="form-group">
+            <label for="password">Confirm Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit">Update Email</button>
+
+        <div class="note">
+            You may be asked to verify your new email before it becomes active.
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
